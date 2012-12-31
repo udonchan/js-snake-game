@@ -20,7 +20,7 @@
 
     SnakeGame.prototype.set_direction = function(direction) {
 	if(0 <= direction && direction <=3 && 
-	   (direction - this._current_direction)%2 != 0 // omit dead direction
+	   !(this.snake.length > 1  && (direction - this._current_direction)%2 == 0) // omit dead direction
 	    ){
 	    this._current_direction = direction;
 	}
@@ -168,12 +168,9 @@ jQuery(document).ready(function(){
 	    }
 	});
 
-    start_button.click(
-	(function(){
-	    return function(){
-		snakeGame.start();
-	    };})(snakeGame)
-	);
+    start_button.click(function(){
+	snakeGame.start();
+    });
 
     reload_button.click(function(){location.reload()});
 });
