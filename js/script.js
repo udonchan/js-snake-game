@@ -30,7 +30,7 @@
     OUTTER_LOOP: do {
 	    this.food = this._randDot();
 	    for(var i = 0; i < this.snake.length; i++){ 
-		if(this.food['x'] == this.snake[i]['x'] && this.food['y'] == this.snake[i]['y']){
+		if(this.food.x == this.snake[i].x && this.food.y == this.snake[i].y){
 		    continue OUTTER_LOOP;	
 		}
 	    }
@@ -53,16 +53,16 @@
 	var new_head;
 	switch(this._current_direction){
 	    case 0: // left
-		new_head = {x : current_head['x'] - 1, y : current_head['y']};
+		new_head = {x : current_head.x - 1, y : current_head.y};
 		break;
 	    case 1: // up
-		new_head = {x : current_head['x'], y : current_head['y'] - 1};
+		new_head = {x : current_head.x, y : current_head.y - 1};
 		break;
 	    case 2: // right
-		new_head = {x : current_head['x'] + 1, y : current_head['y']};
+		new_head = {x : current_head.x + 1, y : current_head.y};
 		break;
 	    case 3: // down
-		new_head = {x : current_head['x'], y : current_head['y'] + 1};
+		new_head = {x : current_head.x, y : current_head.y + 1};
 		break;
 	    default:
 		break;
@@ -84,16 +84,16 @@
     };
 
     SnakeGame.prototype.judge_head = function(new_head){
-	if(new_head['x']  < 0 || this.size_x <= new_head['x'] ||
-	   new_head['y'] < 0 ||  this.size_y <= new_head['y']){ // out of range
+	if(new_head.x  < 0 || this.size_x <= new_head.x ||
+	   new_head.y < 0 ||  this.size_y <= new_head.y){ // out of range
 	    return -1
 	}
 	for(var i = 1; i < this.snake.length; i++){ // head hit the body
-	    if(new_head['x'] == this.snake[i]['x'] && new_head['y'] == this.snake[i]['y']){
+	    if(new_head.x == this.snake[i].x && new_head.y == this.snake[i].y){
 		return -1;
 	    }
 	}
-	if(new_head['x'] == this.food['x'] && new_head['y'] == this.food['y']) {
+	if(new_head.x == this.food.x && new_head.y == this.food.y) {
 	    return 1 // got a food
 	}
 	return 0; 
@@ -134,9 +134,9 @@ jQuery(document).ready(function(){
 	}
 	// append snake dotts to matrix
 	for(var i = 0; i < this.snake.length; i++)
-	    matrix[this.snake[i]['y']][this.snake[i]['x']] = 1;
+	    matrix[this.snake[i].y][this.snake[i].x] = 1;
 	// append a star dot to matrix
-	matrix[this.food['y']][this.food['x']] = 2;
+	matrix[this.food.y][this.food.x] = 2;
 	// print matrix
 	var str = "";
 	for (var y = 0; y < matrix.length; y++) {
