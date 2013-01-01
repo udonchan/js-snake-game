@@ -93,8 +93,8 @@
 		return -1;
 	    }
 	}
-	if(new_head.x == this.food.x && new_head.y == this.food.y) {
-	    return 1 // got a food
+	if(new_head.x == this.food.x && new_head.y == this.food.y) {// got a food
+	    return 1 
 	}
 	return 0; 
     }
@@ -129,27 +129,19 @@ jQuery(document).ready(function(){
 	for (var y = 0; y < this.size_y; y++) {
 	    matrix[y] = new Array(this.size_x);
 	    for (x = 0; x < matrix[y].length; x++) {
-		matrix[y][x] = 0;
+		matrix[y][x] = _blank;
 	    }
 	}
 	// append snake dotts to matrix
 	for(var i = 0; i < this.snake.length; i++)
-	    matrix[this.snake[i].y][this.snake[i].x] = 1;
+	    matrix[this.snake[i].y][this.snake[i].x] = _snake;
 	// append a star dot to matrix
-	matrix[this.food.y][this.food.x] = 2;
-	// print matrix
+	matrix[this.food.y][this.food.x] = _food;
+
 	var str = "";
 	for (var y = 0; y < matrix.length; y++) {
-	    for (x = 0; x < matrix[y].length; x++) {
-		if(matrix[y][x] == 1){
-		    str += _snake;
-		} else if(matrix[y][x] == 2){
-		    str += _food;
-		}else {
-		    str += _blank;
-		}
-	    } str += "<br />";
-	}
+	    str += matrix[y].join("") + "<br />";
+	} 
 	game_view.html(str);
     });
 
