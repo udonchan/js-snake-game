@@ -111,13 +111,12 @@
 })();
 
 jQuery(document).ready(function(){
-    var snakeGame;
     var game_view = jQuery("#game_view");
     var start_button = jQuery("#start");
     var reload_button = jQuery("#reload");
     var score_label = jQuery("#score");
 
-    function draw() {
+    var snakeGame = new SnakeGame(15, 10, function draw() {
 	// print score label
 	score_label.html(this.score);
 
@@ -152,9 +151,7 @@ jQuery(document).ready(function(){
 	    } str += "<br />";
 	}
 	game_view.html(str);
-    }
-
-    snakeGame = new SnakeGame(15, 10, draw);
+    });
 
     $('body').keydown(function(e){
 	    switch (e.keyCode) {
@@ -172,5 +169,7 @@ jQuery(document).ready(function(){
 	snakeGame.start();
     });
 
-    reload_button.click(function(){location.reload()});
+    reload_button.click(function(){
+	location.reload()
+    });
 });
